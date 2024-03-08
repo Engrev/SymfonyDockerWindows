@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+    symfony_docker_windows-php:
+        build:
+            dockerfile: docker/Dockerfile
+        volumes:
+            - ./www:/var/www
+        ports:
+            - 8000:80
+            - 8443:443
+        restart: on-failure
+    symfony_docker_windows-db:
+        image: mariadb
+        environment:
+            TZ: "Europe/Paris"
+            MARIADB_ROOT_PASSWORD: root
+            MARIADB_DATABASE: symfony_docker_windows
+            MARIADB_USER: symfony
+            MARIADB_PASSWORD: symfony
+            volumes:
+                ./db:/var/lib/mysql/symfony_docker_windows
+            restart: on-failure
+    symfony_docker_windows-pma:
+        image: phpmyadmin
+        environment:
+            PMA_HOST: symfony_docker_windows-db
+            PMA_USER: root
+            PMA_PASSWORD: root
+        ports:
+            - 8080:80
+        restart: always
+        depends_on:
+            - symfony_docker_windows-db
