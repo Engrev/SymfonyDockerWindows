@@ -2,12 +2,12 @@
 
 ## Avec Docker
 
-### Prérequis
+### Prérequis ✅
 
 - Installer [Docker](https://docs.docker.com/desktop/install/windows-install/) sur votre Windows.
 - Lancer Docker.
 
-### Installation
+### Installation 🚧
 
 - Cloner ce projet.
 - Vous pouvez modifier les variables d'environnement dans le [docker-compose.yaml](docker-compose.yaml) ainsi que la config git dans le [Dockerfile](docker/Dockerfile).
@@ -16,7 +16,7 @@
 
 Si tout fonctionne, vous pouvez continuer.
 
-### Configuration
+### Configuration 🔧
 
 Il faut maintenant créer le projet symfony.
 Pour ça, nous avons besoin de nous connecter au conteneur php grâce à la commande `docker exec -it <ID_CONTAINER> bash` pour lancer un bash à l'intérieur du conteneur (**<ID_CONTAINER>** peut être récupérer grâce à la commande `docker ps`).
@@ -34,11 +34,18 @@ Maintenant que le projet symfony est initialisé, il faut configurer apache.
 Pour cela, faites un `exit` dans votre terminal pour sortir du conteneur et revenir à votre windows.
 Executez ensuite la commande `docker cp ./docker/apache.conf <ID_CONTAINER>:/etc/apache2/sites-available/000-default.conf` pour que le serveur apache puisse trouver votre site et l'envoyer au navigateur.
 
-### Utilisation
+### Utilisation 👍
 
 Vous avez maintenant accès à votre site à l'adresse [localhost:8000](http://locahost:8000) et à PHPMyAdmin à l'adresse [localhost:8080](http://locahost:8080) (comme précisé dans le [docker-compose.yaml](docker-compose.yaml)).
 
 ![Welcome to Symfony](img-readme.png)
 
-## Avec WSL
+## Avec WSL (sous Debian)
 
+### Prérequis ✅
+
+Suivre les [installations des dépendances nécessaires](docs/WSL_INSTALLATIONS.md) pour ce projet.
+
+### Installation 🚧
+
+- Vous rendre dans le dossier **/var/www**.
