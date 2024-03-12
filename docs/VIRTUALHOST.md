@@ -1,20 +1,20 @@
-# Créer un hôte virtuel pour le projet
+# Create a virtual host for the project
 
-## Créer le fichier pour apache
+## Create the file for apache
 
-- Vous rendre dans le dossier **/etc/apache2/sites-available**.
-- Créez un fichier de configuration, par exemple : `sudo vim symfony-test.conf`.
-- Y ajouter le contenu du fichier [apache.conf](docker/apache.conf) (pour un projet symfony sinon, le fichier 000-default.conf peut servir de base) avec `ServerName symfony-test.local` par exemple.
-- Remplacez les différents chemins par rapport aux votres.
-- Activer le site : `sudo a2ensite symfony-test.conf`.
+- Go to the folder **/etc/apache2/sites-available**.
+- Create a configuration file, for example : `sudo vim symfony-test.conf`.
+- Add the contents of the file [apache.conf](docker/apache.conf) (for a symfony project otherwise, the 000-default.conf file can be used as a basis) with `ServerName symfony-test.local` for example.
+- Replace the different paths with yours.
+- Enable website : `sudo a2ensite symfony-test.conf`.
 
-## Mettre à jour le fichier hosts sur Windows
+## Update the hosts file on Windows
 
-- Modifiez le fichier **C:\Windows\System32\drivers\etc\hosts** en ajoutant :
+- Edit the file **C:\Windows\System32\drivers\etc\hosts** by adding :
 ```
 127.0.0.1 	symfony-test.local
 ::1 		symfony-test.local
 ```
 
 [!NOTE]
-Répétez ces opérations pour tous vos projets.
+Repeat these operations for all your projects.

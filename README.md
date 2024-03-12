@@ -1,50 +1,50 @@
-# Projet Symfony en environnement de dev sur Windows 11 avec Docker et WSL
+# Symfony project in dev environment on Windows 11 with Docker and WSL
 
-## Avec Docker
+## With Docker
 
-### Prérequis ✅
+### Prerequisites ✅
 
-- Installer [Docker](https://docs.docker.com/desktop/install/windows-install/) sur votre Windows.
-- Lancer Docker.
+- Install [Docker](https://docs.docker.com/desktop/install/windows-install/) on your Windows.
+- Launch Docker.
 
 ### Installation 🚧
 
-- Cloner ce projet.
-- Vous pouvez modifier les variables d'environnement dans le [docker-compose.yaml](docker-compose.yaml) ainsi que la config git dans le [Dockerfile](docker/Dockerfile).
-- Ouvrez un terminal à la racine du projet et faites un `docker compose build`.
-- Une fois le build terminé, faites un `docker compose up -d`. Vous devriez voir apparaitre votre image et les conteneurs dans le Docker Desktop.
+- Clone this project : `git clone https://github.com/Engrev/SymfonyDockerWindows.git`.
+- You can change environment variables in [docker-compose.yaml](docker-compose.yaml) as well as the git config in [Dockerfile](docker/Dockerfile).
+- Open a terminal at the root of the project and make `docker compose build`.
+- Once the build is complete, make `docker compose up -d`. You should see your image and containers appear in Docker Desktop.
 
-Si tout fonctionne, vous pouvez continuer.
+If everything works, you can continue.
 
 ### Configuration 🔧
 
-Il faut maintenant créer le projet symfony.
-Pour ça, nous avons besoin de nous connecter au conteneur php grâce à la commande `docker exec -it <ID_CONTAINER> bash` pour lancer un bash à l'intérieur du conteneur (**<ID_CONTAINER>** peut être récupérer grâce à la commande `docker ps`).
+You must now create the symfony project.
+For this, we need to connect to the php container using the command `docker exec -it <ID_CONTAINER> bash` to run a bash inside the container (**<ID_CONTAINER>** can be recovered thanks to the order `docker ps`).
 
-Une fois à l'intérieur, nous sommes dans l'espace de travail **/var/www** (comme précisé dans le [Dockerfile](docker/Dockerfile)).
-C'est dans ce répertoire que nous allons installer notre application symfony, avec l'une des commandes suivantes (**app** est à remplacer à votre convenance) :
-1. `symfony new app --webapp` ou `composer create-project symfony/skeleton:"7.0.*" app`.
-2. `symfony new app --webapp --version=lts` si vous souhaitez utiliser une version LTS de Symfony.
-   Ce raccourci n'est disponible qu'avec le binaire Symfony.
-   Si vous utilisez composer, vous devez spécifier la version exacte : `composer create-project symfony/skeleton:"6.4.*" app` par exemple.
+Once inside, we are in the workspace **/var/www** (as precised in [Dockerfile](docker/Dockerfile)).
+It is in this directory that we will install our symfony application, with one of the following commands (**app** can be replaced at your convenience) :
+1. `symfony new app --webapp` or `composer create-project symfony/skeleton:"7.0.*" app`.
+2. `symfony new app --webapp --version=lts` if you want to use an LTS version of Symfony.
+   This shortcut is only available with the Symfony binary.
+   If you use composer, you must specify the exact version : `composer create-project symfony/skeleton:"6.4.*" app` for example.
 
-Si vous utilisez composer, vous devez ensuite faire un `cd app`, `composer require webapp` (vous pouvez ajouter l'option `--no-interaction` à vos commandes composer pour le laisser faire, sans qu'il vous pose de questions).
+If you use composer, you then need to do `cd app`, `composer require webapp` (you can add the option `--no-interaction` at your commands composer to let him do it, without him asking you any questions).
 
-Maintenant que le projet symfony est initialisé, il faut configurer apache.
-Pour cela, faites un `exit` dans votre terminal pour sortir du conteneur et revenir à votre windows.
-Executez ensuite la commande `docker cp ./docker/apache.conf <ID_CONTAINER>:/etc/apache2/sites-available/000-default.conf` pour que le serveur apache puisse trouver votre site et l'envoyer au navigateur.
+Now that the symfony project is initialized, you need to configure Apache.
+To do this, make `exit` in your terminal to exit the container and return to your windows.
+Then run the command `docker cp ./docker/apache.conf <ID_CONTAINER>:/etc/apache2/sites-available/000-default.conf` so that the apache server can find your site and send it to the browser.
 
-### Utilisation 👍
+### Use 👍
 
-Vous avez maintenant accès à votre site à l'adresse [localhost:8000](http://locahost:8000) et à PHPMyAdmin à l'adresse [localhost:8080](http://locahost:8080) (comme précisé dans le [docker-compose.yaml](docker-compose.yaml)).
+You now have access to your site at [localhost:8000](http://locahost:8000) and to PHPMyAdmin at [localhost:8080](http://locahost:8080) (as precised in [docker-compose.yaml](docker-compose.yaml)).
 
 ![Welcome to Symfony](img-readme.png)
 
-## Avec WSL (sous Debian)
+## With WSL (under Debian)
 
-### Prérequis ✅
+### Prerequisites ✅
 
-Suivre les [installations des dépendances nécessaires](docs/WSL_INSTALLATIONS.md) pour ce projet.
+Follow the [installation of outbuildings necessary](docs/WSL_INSTALLATIONS.md) for this project.
 
 ### Installation 🚧
 
