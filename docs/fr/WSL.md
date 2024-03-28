@@ -1,32 +1,51 @@
-# Installation des dépendances (git, mysql ou mariadb, curl, nvm, apache, php, composer, symfony cli) 📦
+# Installation des dépendances (Apache, PHP FPM, MariaDB, PHPMyAdmin, Git, Curl, NVM) 📦
+
+## Apache ⬅️
+
+Installer apache : `sudo apt install apache2`.
+
+## PHP-FPM ⬅️
+
+- Installer php fpm : `sudo apt install php8.2-fpm`.
+- Activer 2 modules pour apache : `sudo a2enmod proxy_fcgi setenvif`.
+- Activer la configuration de php fpm pour apache : `sudo a2enconf php8.2-fpm`.
+- Recharger la configuration d'apache : `sudo service apache2 reload`.
+- Redémarrer le service php fpm : `sudo service php8.2-fpm restart`.
+
+## MariaDB et PHPMyAdmin ⬅️
+
+- Installer mariadb : `sudo apt install mariadb-server`.
+- Démarrer mariadb : `sudo service mariadb start`.
+- Activer le démarrage automatique de mariadb au démarrage du serveur : `sudo systemctl enable mariadb`.
+- Créer un utilisateur admin avec les privilèges **root** et un accès par mot de passe (pour ne pas toucher à l'utilisateur root) :
+  - `sudo mariadb`.
+  - `GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;`.
+  - `FLUSH PRIVILEGES;`.
+  - `exit`.
+- Installer phpmyadmin : `sudo apt install phpmyadmin`.
+- Choisir **apache2** et renseigner un mot de passe (un utilisateur sera créé spécialement pour la base de données de phpmyadmin).
+- Recharger la configuration d'apache : `sudo service apache2 reload`.
+- Redémarrer le service php fpm : `sudo service php8.2-fpm restart`.
+
+## Curl ⬅️
+
+Installer curl : `sudo apt install curl`.
+
+## NVM  ⬅️
+
+Installer nvm : `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash` puis `nvm install --lts`.
 
 ## Git ⬅️
 
-- Installer git : `sudo apt install git && git config --global user.name "Your name" && git config --global user.email "youremail@domain.com"`.
-- Configuration de Git Credential Manager :
-    - Si la version de Git installée est >= v2.39.0 : `git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"`.
-    - Si la version de Git installée est >= v2.36.1 : `git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"`.
-    - Si la version de Git installée est < v2.36.1 : `git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe"`.
+- Installer git : `sudo apt install git-all`.
+- `cd` pour retourner dans le répertoire utilisateur.
+- Configurer : `vim .gitconfig`.
+```
+[user]
+  name = Your name
+  email = your@email.com
+```
 - Génération d’une nouvelle clé SSH et ajout de celle-ci à ssh-agent : suivre cette [documentation](https://docs.github.com/fr/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux).
-
-## MySQL ou MariaDB ⬅️
-
-- Configurer une base de données :
-    - MySQL : exécuter les commandes suivantes : `sudo apt update && sudo apt install lsb-release wget gnupg` puis suivre [ce guide](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/).
-    - Autres systèmes (PostgreSQL, Microsoft SQL Server, SQLite, MongoDB, Redis), se référer à [ce guide](https://learn.microsoft.com/fr-fr/windows/wsl/tutorials/wsl-database).
-
-## Curl et NVM ⬅️
-
-- Installer curl : `sudo apt update && sudo apt install curl`.
-- Installer nvm : `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash` puis `nvm install --lts`.
-
-## Apache, PHP et PhpMyAdmin ⬅️
-
-- Installer LAMP : `sudo apt install apache2 php php-common libapache2-mod-php mariadb-server php-mysql phpmyadmin`.
-- Installer les modules courants PHP : `sudo apt install php-curl php-gd php-intl php-json php-mbstring php-xml php-zip`.
-- Configurer phpmyadmin en suivant [ce guide](https://www.it-connect.fr/installer-phpmyadmin-sur-debian-11-et-apache/).
-  Pour la partie **IV. Intégration de PhpMyAdmin à Apache**, exécuter plutôt cette commande : `sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/sites-available/phpmyadmin.conf` puis `sudo a2ensite phpmyadmin.conf`.
-- Créer un [hôte virtuel](VIRTUALHOST.md) apache.
 
 ## Composer et Symfony CLI ⬅️
 

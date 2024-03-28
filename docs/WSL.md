@@ -1,32 +1,51 @@
-# Installing dependencies (git, mysql ou mariadb, curl, nvm, apache, php, composer, symfony cli) 📦
+# Installing dependencies (Apache, PHP FPM, MariaDB, PHPMyAdmin, Git, Curl, NVM) 📦
+
+## Apache ⬅️
+
+Install apache : `sudo apt install apache2`.
+
+## PHP-FPM ⬅️
+
+- Install php fpm : `sudo apt install php8.2-fpm`.
+- Enable 2 modules for apache : `sudo a2enmod proxy_fcgi setenvif`.
+- Enable the configuration of php fpm for apache : `sudo a2enconf php8.2-fpm`.
+- Reload apache configuration : `sudo service apache2 reload`.
+- Restart php fpm service : `sudo service php8.2-fpm restart`.
+
+## MariaDB et PHPMyAdmin ⬅️
+
+- Install mariadb : `sudo apt install mariadb-server`.
+- Start mariadb : `sudo service mariadb start`.
+- Enable automatic mariadb start on server startup : `sudo systemctl enable mariadb`.
+- Create an admin user with **root** privileges and password access (so as not to touch the root user) :
+  - `sudo mariadb`.
+  - `GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;`.
+  - `FLUSH PRIVILEGES;`.
+  - `exit`.
+- Install phpmyadmin : `sudo apt install phpmyadmin`.
+- Choose **apache2** and enter a password (a user will be created specifically for the phpmyadmin database).
+- Reload apache configuration : `sudo service apache2 reload`.
+- Restart php fpm service : `sudo service php8.2-fpm restart`.
+
+## Curl ⬅️
+
+Install curl : `sudo apt install curl`.
+
+## NVM  ⬅️
+
+Install nvm : `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash` and `nvm install --lts`.
 
 ## Git ⬅️
 
-- Install git : `sudo apt install git && git config --global user.name "Your name" && git config --global user.email "youremail@domain.com"`.
-- Configuration of Git Credential Manager :
-    - If the installed Git version is >= v2.39.0 : `git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"`.
-    - If the installed Git version is >= v2.36.1 : `git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"`.
-    - If the installed Git version is < v2.36.1 : `git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe"`.
-- Generating a new SSH key and adding it to ssh-agent : follow this [documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux).
-
-## MySQL or MariaDB ⬅️
-
-- Configure a database :
-    - MySQL : run the following commands : `sudo apt update && sudo apt install lsb-release wget gnupg` then follow [this guide](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/).
-    - Other systems (PostgreSQL, Microsoft SQL Server, SQLite, MongoDB, Redis), refer to [ce guide](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-database).
-
-## Curl and NVM ⬅️
-
-- Install curl : `sudo apt update && sudo apt install curl`.
-- Install nvm : `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash` then `nvm install --lts`.
-
-## Apache, PHP and PhpMyAdmin ⬅️
-
-- Install LAMP : `sudo apt install apache2 php php-common libapache2-mod-php mariadb-server php-mysql phpmyadmin`.
-- Install common PHP modules : `sudo apt install php-curl php-gd php-intl php-json php-mbstring php-xml php-zip`.
-- Configure phpmyadmin by following [this guide](https://www.it-connect.fr/installer-phpmyadmin-sur-debian-11-et-apache/).
-  For part **IV. PhpMyAdmin integration with Apache**, run this command instead : `sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/sites-available/phpmyadmin.conf` then `sudo a2ensite phpmyadmin.conf`.
-- Create an Apache [virtual host](VIRTUALHOST.md).
+- Install git : `sudo apt install git-all`.
+- `cd` to return in user dir.
+- Configure : `vim .gitconfig`.
+```
+[user]
+  name = Your name
+  email = your@email.com
+```
+- Generating a new SSH key and adding it to ssh-agent : follow this [documentation](https://docs.github.com/fr/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux).
 
 ## Composer and Symfony CLI ⬅️
 
