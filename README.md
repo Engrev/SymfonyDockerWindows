@@ -48,32 +48,32 @@ Follow the [installation of outbuildings necessary](docs/WSL.md) for this projec
 
 ### Configuration 🔧
 
-Il faut maintenant créer le projet symfony.
-Pour ça, rendez-vous dans votre dossier utilisateur.
-C'est dans ce répertoire que nous allons installer notre application symfony, avec l'une des commandes suivantes (**app** est à remplacer à votre convenance) :
-1. `symfony new app --webapp` ou `composer create-project symfony/skeleton:"7.0.*" app`.
-2. `symfony new app --webapp --version=lts` si vous souhaitez utiliser une version LTS de Symfony.
-   Ce raccourci n'est disponible qu'avec le binaire Symfony.
-   Si vous utilisez composer, vous devez spécifier la version exacte : `composer create-project symfony/skeleton:"6.4.*" app` par exemple.
+You must now create the symfony project.
+To do this, go to your user folder.
+It is in this directory that we will install our symfony application, with one of the following commands (**app** can be replaced at your convenience) :
+1. `symfony new app --webapp` or `composer create-project symfony/skeleton:"7.0.*" app`.
+2. `symfony new app --webapp --version=lts` if you want to use an LTS version of Symfony.
+   This shortcut is only available with the Symfony binary.
+   If you use composer, you must specify the exact version : `composer create-project symfony/skeleton:"6.4.*" app` for example.
 
-Si vous utilisez composer, vous devez ensuite faire un `cd app`, `composer require webapp` (vous pouvez ajouter l'option `--no-interaction` à vos commandes composer pour le laisser faire, sans qu'il vous pose de questions).
+If you use composer, you then need to do `cd app`, `composer require webapp` (you can add the option `--no-interaction` at your commands composer to let him do it, without him asking you any questions).
 
-Maintenant que le projet symfony est initialisé, il faut créer un lien symbolique dans le "dossier de travail" d'apache : `sudo ln -s /home/<username>/app /var/www/symfony-test.wsl`.
-Nous pouvons maintenant créer un [hôte virtuel](docs/WSL_VIRTUALHOST.md).
-Il ne faut surtout pas oublier de donner les droits d'accès à votre dossier personnel à apache :
-- en ajoutant l'utilisateur au groupe **www-data** : `sudo adduser <user> www-data`.
-- puis donner les droits à **www-data** sur le dossier de l'utilisateur :
+Now that the symfony project is initialized, you must create a symbolic link in the Apache "working folder" : `sudo ln -s /home/<username>/app /var/www/symfony-test.wsl`.
+We can now create a [virtual host](docs/WSL_VIRTUALHOST.md).
+Above all, don't forget to give Apache access rights to your personal folder :
+- by adding the user to the group **www-data** : `sudo adduser <user> www-data`.
+- then give the rights to **www-data** on the user folder :
    - `cd /home`.
-   - `sudo chgrp -R www-data <user>` (vous pouvez changer le groupe uniquement pour le dossier de votre application mais il faut quand même changer le groupe du dossier utilisateur).
-     Par exemple :
+   - `sudo chgrp -R www-data <user>` (you can change the group only for your application folder but you still have to change the group for the user folder).
+     For example :
     ```
     /home
     |-- <user>     <user> <user>
         `-- app    <user> <user>
         `-- xxx    <user> <user>
     ```
-  Vous pouvez faire un `sudo chgrp -R www-data /home/<user>/app` et faire juste un `sudo chgrp www-data /home/<user>`.
-  Ce qui donne :
+  You can make a `sudo chgrp -R www-data /home/<user>/app` and make just one `sudo chgrp www-data /home/<user>`.
+  Which give :
     ```
     /home
     |-- <user>     <user> www-data
@@ -82,6 +82,6 @@ Il ne faut surtout pas oublier de donner les droits d'accès à votre dossier pe
     ```
    - `sudo chmod g+rx <user>`.
 
-Vous pouvez également ajouter à votre projet, la dépendance **symfony/apache-pack** en faisant un `composer require symfony/apache-pack`.
+You can also add the **symfony/apache-pack** dependency to your project by doing a `composer require symfony/apache-pack`.
 
 ![Welcome to Symfony](docs/img-readme2.png)
