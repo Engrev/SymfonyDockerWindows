@@ -4,7 +4,7 @@
 
 - Go to the folder **/etc/apache2/sites-available**.
 - Create a configuration file, for example : `sudo vim symfony-test.conf`.
-- Add the contents of the file [apache.conf](../docker/apache.conf) with `ServerName symfony-test.wsl` for example.
+- Add the contents of the file [apache.conf](../../docker/apache.conf) with `ServerName symfony-test.wsl` for example.
 - Replace the different paths with yours.
 - Enable website : `sudo a2ensite symfony-test`.
 

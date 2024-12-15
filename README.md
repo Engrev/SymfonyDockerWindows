@@ -44,7 +44,7 @@ You now have access to your site at [localhost:8000](http://locahost:8000) and t
 
 ### Prerequisites ✅
 
-Follow the [installation of outbuildings necessary](docs/WSL.md) for this project.
+Follow the [installation of outbuildings necessary](docs/en/WSL.md) for this project.
 
 ### Configuration 🔧
 
@@ -59,7 +59,7 @@ It is in this directory that we will install our symfony application, with one o
 If you use composer, you then need to do `cd app`, `composer require webapp` (you can add the option `--no-interaction` at your commands composer to let him do it, without him asking you any questions).
 
 Now that the symfony project is initialized, you must create a symbolic link in the Apache "working folder" : `sudo ln -s /home/<username>/app /var/www/symfony-test.wsl`.
-We can now create a [virtual host](docs/WSL_VIRTUALHOST.md).
+We can now create a [virtual host](docs/en/WSL_VIRTUALHOST.md).
 Above all, don't forget to give Apache access rights to your personal folder :
 - by adding the user to the group **www-data** : `sudo adduser <user> www-data`.
 - then give the rights to **www-data** on the user folder :
